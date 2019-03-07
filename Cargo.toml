@@ -8,6 +8,10 @@ description = "Low level access to RISC-V processors"
 keywords = ["riscv", "register", "peripheral"]
 license = "ISC"
 
+[lib]
+name = "riscv"
+crate-type = ["rlib"]
+
 [dependencies]
 bare-metal = "0.2.0"
 bit_field = "0.9.0"
