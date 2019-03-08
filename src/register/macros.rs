@@ -111,20 +111,7 @@ macro_rules! clear {
         #[allow(unused_variables)]
         unsafe fn _clear(bits: usize) {
             match () {
-                #[cfg(all(riscv, feature = "inline-asm"))]
                 () => asm!("csrrc x0, $1, $0" :: "r"(bits), "i"($csr_number) :: "volatile"),
-
-                #[cfg(all(riscv, not(feature = "inline-asm")))]
-                () => {
-                    extern "C" {
-                        fn $asm_fn(bits: usize);
-                    }
-
-                    $asm_fn(bits);
-                }
-
-                #[cfg(not(riscv))]
-                () => unimplemented!(),
             }
         }
     };
@@ -163,7 +150,6 @@ macro_rules! read_composite_csr {
         #[inline]
         pub fn read64() -> u64 {
             match () {
-                #[cfg(riscv32)]
                 () => loop {
                     let hi = $hi;
                     let lo = $lo;
@@ -171,9 +157,6 @@ macro_rules! read_composite_csr {
                         return ((hi as u64) << 32) | lo as u64;
                     }
                 },
-
-                #[cfg(not(riscv32))]
-                () => $lo as u64,
             }
         }
     }

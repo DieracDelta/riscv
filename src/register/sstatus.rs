@@ -129,14 +129,12 @@ set_clear_csr!(
 
 /// Supervisor Previous Privilege Mode
 #[inline]
-#[cfg(riscv)]
 pub unsafe fn set_spp(spp: SPP) {
     _set((spp as usize) << 8);
 }
 
 /// The status of the floating-point unit
 #[inline]
-#[cfg(riscv)]
 pub unsafe fn set_fs(fs: FS) {
     _set((fs as usize) << 13);
 }

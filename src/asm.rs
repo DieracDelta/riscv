@@ -6,20 +6,7 @@ macro_rules! instruction {
         #[inline]
         pub unsafe fn $fnname() {
             match () {
-                #[cfg(all(riscv, feature = "inline-asm"))]
                 () => asm!($asm :::: "volatile"),
-
-                #[cfg(all(riscv, not(feature = "inline-asm")))]
-                () => {
-                    extern "C" {
-                        fn $asm_fn();
-                    }
-
-                    $asm_fn();
-                }
-
-                #[cfg(not(riscv))]
-                () => unimplemented!(),
             }
         }
     )
@@ -59,19 +46,6 @@ instruction!(
 #[allow(unused_variables)]
 pub unsafe fn sfence_vma(asid: usize, addr: usize) {
     match () {
-        #[cfg(all(riscv, feature = "inline-asm"))]
         () => asm!("sfence.vma $0, $1" :: "r"(asid), "r"(addr) :: "volatile"),
-
-        #[cfg(all(riscv, not(feature = "inline-asm")))]
-        () => {
-            extern "C" {
-                fn __sfence_vma(asid: usize, addr: usize);
-            }
-
-            __sfence_vma(asid, addr);
-        }
-
-        #[cfg(not(riscv))]
-        () => unimplemented!(),
     }
 }
