@@ -1,11 +1,9 @@
-//! scause register
-
 use bit_field::BitField;
 use core::mem::size_of;
 
 /// scause register
 #[derive(Clone, Copy, Debug)]
-pub struct Scause {
+pub struct Ucause {
     bits: usize,
 }
 
@@ -20,11 +18,8 @@ pub enum Trap {
 #[derive(Copy, Clone, Debug)]
 pub enum Interrupt {
     UserSoft,
-    SupervisorSoft,
     UserTimer,
-    SupervisorTimer,
     UserExternal,
-    SupervisorExternal,
     Unknown,
 }
 
@@ -38,7 +33,6 @@ pub enum Exception {
     LoadFault,
     StoreMisaligned,
     StoreFault,
-    UserEnvCall,
     InstructionPageFault,
     LoadPageFault,
     StorePageFault,
@@ -49,16 +43,12 @@ impl Interrupt {
     pub fn from(nr: usize) -> Self {
         match nr {
             0 => Interrupt::UserSoft,
-            1 => Interrupt::SupervisorSoft,
             4 => Interrupt::UserTimer,
-            5 => Interrupt::SupervisorTimer,
             8 => Interrupt::UserExternal,
-            9 => Interrupt::SupervisorExternal,
             _ => Interrupt::Unknown,
         }
     }
 }
-
 
 impl Exception {
     pub fn from(nr: usize) -> Self {
@@ -70,7 +60,6 @@ impl Exception {
             5 => Exception::LoadFault,
             6 => Exception::StoreMisaligned,
             7 => Exception::StoreFault,
-            8 => Exception::UserEnvCall,
             12 => Exception::InstructionPageFault,
             13 => Exception::LoadPageFault,
             15 => Exception::StorePageFault,
@@ -115,4 +104,5 @@ impl Scause {
     }
 }
 
-read_csr_as!(Scause, 0x142, __read_scause);
+read_csr_as!(Scause, 0x042, __read_ucause);
+

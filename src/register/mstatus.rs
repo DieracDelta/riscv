@@ -111,3 +111,4 @@ pub unsafe fn set_spp(spp: SPP) {
 pub unsafe fn set_mpp(mpp: MPP) {
     _set((mpp as usize) << 11);
 }
+// note no upp bit b/c previous privilege is by defn user
