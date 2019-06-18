@@ -23,6 +23,12 @@ pub enum SPP {
 impl Mstatus {
     /// User Interrupt Enable
     #[inline]
+    pub fn bits(&self) -> usize {
+        self.bits
+    }
+
+    /// User Interrupt Enable
+    #[inline]
     pub fn uie(&self) -> bool {
         self.bits & (1 << 0) == 1 << 0
     }
@@ -77,7 +83,6 @@ impl Mstatus {
         }
     }
 }
-
 
 read_csr_as!(Mstatus, 0x300, __read_mstatus);
 set!(0x300, __set_mstatus);
