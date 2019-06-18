@@ -60,6 +60,7 @@ pub mod stvec;
 pub mod time;
 pub mod timeh;
 
+#[derive(Copy, Clone)]
 pub enum PmpAField {
     OFF = 0,
     TOR = 1,

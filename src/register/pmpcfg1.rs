@@ -223,18 +223,18 @@ set_clear_csr!(
     , set_l7, clear_l7, 1 << 31);
 
 #[inline]
-pub unsafe fn set_a0(a_field: PmpAField) {
+pub unsafe fn set_a4(a_field: PmpAField) {
     _set((a_field as usize) << 3);
 }
 #[inline]
-pub unsafe fn set_a1(a_field: PmpAField) {
+pub unsafe fn set_a5(a_field: PmpAField) {
     _set((a_field as usize) << 11);
 }
 #[inline]
-pub unsafe fn set_a2(a_field: PmpAField) {
+pub unsafe fn set_a6(a_field: PmpAField) {
     _set((a_field as usize) << 19);
 }
 #[inline]
-pub unsafe fn set_a3(a_field: PmpAField) {
+pub unsafe fn set_a7(a_field: PmpAField) {
     _set((a_field as usize) << 27);
 }
