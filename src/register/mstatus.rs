@@ -97,15 +97,15 @@ set_clear_csr!(
 set_clear_csr!(
     /// Machine Interrupt Enable
     , set_mie, clear_mie, 1 << 3);
-set_csr!(
+set_clear_csr!(
     /// User Previous Interrupt Enable
-    , set_upie, 1 << 4);
-set_csr!(
+    , set_upie, clear_upie, 1 << 4);
+set_clear_csr!(
     /// Supervisor Previous Interrupt Enable
-    , set_spie, 1 << 5);
-set_csr!(
+    , set_spie, clear_spie, 1 << 5);
+set_clear_csr!(
     /// Machine Previous Interrupt Enable
-    , set_mpie, 1 << 7);
+    , set_mpie, clear_mpie, 1 << 7);
 /// Supervisor Previous Privilege Mode
 #[inline]
 pub unsafe fn set_spp(spp: SPP) {

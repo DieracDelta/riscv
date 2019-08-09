@@ -46,6 +46,7 @@ pub mod pmpcfg0;
 pub mod pmpcfg1;
 pub mod pmpcfg2;
 pub mod pmpcfg3;
+pub mod mscratch;
 
 pub mod satp;
 pub mod scause;
